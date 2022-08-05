@@ -1,3 +1,60 @@
+local cmp = require("cmp")
+local source_mapping = {
+	buffer = "[Buffer]",
+	nvim_lsp = "[LSP]",
+	nvim_lua = "[Lua]",
+	path = "[Path]",
+}
+local lspkind = require("lspkind")
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			-- For `vsnip` user.
+			-- vim.fn["vsnip#anonymous"](args.body)
+
+			-- For `luasnip` user.
+			require("luasnip").lsp_expand(args.body)
+
+			-- For `ultisnips` user.
+			-- vim.fn["UltiSnips#Anon"](args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+	}),
+
+	formatting = {
+		format = function(entry, vim_item)
+			vim_item.kind = lspkind.presets.default[vim_item.kind]
+			local menu = source_mapping[entry.source.name]
+    		vim_item.menu = menu
+			return vim_item
+		end,
+	},
+
+	sources = {
+		{ name = "nvim_lsp" },
+
+		-- For vsnip user.
+		-- { name = 'vsnip' },
+
+		-- For luasnip user.
+		{ name = "luasnip" },
+
+		-- For ultisnips user.
+		-- { name = 'ultisnips' },
+
+		{ name = "buffer" },
+
+	},
+})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -39,5 +96,6 @@ local lsp_flags = {
 require('lspconfig')['intelephense'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
+    capabilities = capabilities
 }
 
