@@ -6,6 +6,7 @@ local source_mapping = {
 	path = "[Path]",
 }
 local lspkind = require("lspkind")
+local lspconfig = require("lspconfig")
 
 cmp.setup({
 	snippet = {
@@ -25,7 +26,27 @@ cmp.setup({
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
-	}),
+
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            local col = vim.fn.col('.') - 1
+
+            if cmp.visible() then
+                cmp.select_next_item(select_opts)
+            elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+                fallback()
+            else
+                cmp.complete()
+            end
+        end, {'i', 's'}),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item(select_opts)
+            else
+                fallback()
+            end
+        end, {'i', 's'}),
+
+    }),
 
 	formatting = {
 		format = function(entry, vim_item)
@@ -93,9 +114,9 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
-require('lspconfig')['intelephense'].setup{
+lspconfig.intelephense.setup({
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
-}
+})
 
