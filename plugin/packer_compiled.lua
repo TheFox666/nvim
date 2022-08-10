@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/home/kevin/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/kevin/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -128,6 +133,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kevin/.local/share/nvim/site/pack/packer/start/neogit",
     url = "https://github.com/TimUntersberger/neogit"
+  },
+  neotest = {
+    loaded = true,
+    path = "/home/kevin/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
+  },
+  ["neotest-phpunit"] = {
+    loaded = true,
+    path = "/home/kevin/.local/share/nvim/site/pack/packer/start/neotest-phpunit",
+    url = "https://github.com/olimorris/neotest-phpunit"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/kevin/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
