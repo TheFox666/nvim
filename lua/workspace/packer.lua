@@ -2,12 +2,28 @@ return require("packer").startup(function()
     use("wbthomason/packer.nvim")
 
     -- Simple plugins can be specified as strings
-    use("TimUntersberger/neogit")
-
-    -- TJ created lodash of neovim
+        use { 
+        'TimUntersberger/neogit', 
+        requires = { 
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim' 
+        }
+    }
+      
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
     use("nvim-telescope/telescope.nvim")
+    use("BurntSushi/ripgrep")
+    use("nvim-telescope/telescope-live-grep-args.nvim")
+    use {
+        'sudormrfbin/cheatsheet.nvim',
+
+        requires = {
+            {'nvim-telescope/telescope.nvim'},
+            {'nvim-lua/popup.nvim'},
+            {'nvim-lua/plenary.nvim'},
+        }
+    }
 
     -- All the things
     use("neovim/nvim-lspconfig")

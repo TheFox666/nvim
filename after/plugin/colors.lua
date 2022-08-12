@@ -1,7 +1,7 @@
 vim.g.workspace_colorscheme = "gruvbox" 
 
 function ColorMyPencils()
-    vim.g.gruvbox_contrast_dark = 'hard'
+    vim.g.gruvbox_contrast_dark = 'soft'
     vim.g.tokyonight_transparent_sidebar = true
     vim.g.tokyonight_transparent = true
     vim.g.gruvbox_invert_selection = '0'
@@ -19,15 +19,15 @@ function ColorMyPencils()
 
     hl("ColorColumn", {
         ctermbg = 0,
-        bg = "#555555",
+        bg = "#333333",
     })
 
     hl("CursorLineNR", {
-        bg = "None"
+        bg = "#222222"
     })
 
     hl("Normal", {
-        bg = "none"
+        ctermbg=NONE
     })
 
     hl("LineNr", {

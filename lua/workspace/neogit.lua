@@ -1,7 +1,12 @@
 local neogit = require('neogit')
+local diffview = require('diffview')
 local nnoremap = require('workspace.keymap').nnoremap
 
-neogit.setup {}
+neogit.setup {
+    integrations = {
+        diffview = true
+    },
+}
 
 nnoremap("<leader>gs", function()
     neogit.open({ })
